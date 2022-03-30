@@ -2,13 +2,14 @@ const express = require('express');
 const exphbr = require('express-handlebars');
 const session = require('express-session');
 const path = require('path')
+const routes = require('./controllers')
 
 
 const app = express();
 const PORT = process.env.PORT || 3001; 
 
 const sequelize = require('./config/config');
-const seqStore = require('connection-session-sequelize')(session.Store)
+const seqStore = require('connect-session-sequelize')(session.Store)
 
 const sess = {
     secret: 'abcdefghijklmnopqrstuvwxyzzyx',
@@ -30,10 +31,10 @@ app.search(express.json())
 app.use(express.urlencoded({extended: false}))
 app.use(express.static(path.join(__dirname, "public")))
 
-app.use('./controllers/')
+app.use(routes)
 
 app.listen(PORT, () => {
-    console.log(`App listening on post: ${PORT}`)
+    console.log(`App listening on port: ${PORT}`)
     sequelize.sync()
 })
 
