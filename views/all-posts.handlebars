@@ -1,4 +1,10 @@
 <div>
-    <h1>{{title}}</h1>
+    {{#each posts2}}
+    <div>
+
+    <h3>Post by {{username}}</h3>
+    <h5>{{title}}</h5>
     <p>{{body}}</p>
+    </div>
+    {{/each}}
 </div>
