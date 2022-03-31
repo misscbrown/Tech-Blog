@@ -1,23 +1,31 @@
 //create router
 const router = require('express').Router();
-const { Comment, Post, User } = require('../models');
+const { Comment, Post, User } = require('../models/');
 
 // get request to get all posts/blogs in the db
 router.get('/', (req, res) => {
-    Post.findbyPk(req.params.id, {
+  
+    Post.findAll({
         include: [
             User,
-            {
-                model: Comment,
-                include: [User],
-            },
         ],
     })
     .then((dbPostData) => {
         if (dbPostData) {
-            const post = dbPostData.get({ plain: true });
+            const posts = dbPostData.map((postData) => {postData.get({ plain: true });})
+                console.log('posts:', posts)
 
-            res.render('single-post', { post });
+                // const posts2 = [{
+                //     title: 'Post 1',
+                //     username: 'User 1',
+                //     body: 'This is the body of post 1 '
+                // }, {
+                //     title: 'Post 2',
+                //     username: 'User 2',
+                //     body: 'This is the body of post 2 '
+                // }]
+                
+            res.render('all-posts', { posts });
         } else {
             res.status(404).end();
         }
@@ -30,7 +38,7 @@ router.get('/', (req, res) => {
 
 // get request for single post
 router.get('/post/:id', (req, res) => {
-    Post.findbyPk(req.params.id, {
+    Post.findByPk(req.params.id, {
         include: [
             User,
             {
