@@ -5,7 +5,7 @@ const loginFormHandler = async (event) => {
     const username = document.querySelector('#username-login').value.trim();
     const password = document.querySelector('#password-login').value.trim();
 
-    if (email && password) {
+    if (username && password) {
         // Send a POST request to the API endpoint
         const response = await fetch('/api/users/login', {
             method: 'POST',
@@ -17,7 +17,7 @@ const loginFormHandler = async (event) => {
             // If successful, redirect the browser to dashboard
             document.location.replace('/dashboard');
         } else {
-            alert(response.statusText);
+            alert('This user ' + response.statusText);
         }
     }
 };
@@ -25,4 +25,4 @@ const loginFormHandler = async (event) => {
 
 document
     .querySelector('#login-button')
-    .addEventListener('submit', loginFormHandler);
+    .addEventListener('click', loginFormHandler);
