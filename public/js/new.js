@@ -5,7 +5,7 @@ const newFormHandler = async function(event) {
     const body = document.querySelector('textarea[name="post-body"]').value.trim();
 
     const token = localStorage.getItem('token');
-    await fetch (`/api/post`, {
+    await fetch (`/post`, {
         method: 'POST',
         body: JSON.stringify({
             title,
