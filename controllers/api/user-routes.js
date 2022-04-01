@@ -25,12 +25,18 @@ router.post('/', async (req, res) => {
 
 // Login
 router.post('/login', async (req, res) => {
+    console.log('***************' + req, res);
+    const username = req.split(' ')[1];
     try {
-        const dbUserData = await User.findOne({
-            where: {
-                email: req.body.email,
-            },
-        });
+        // const dbUserData = await User.findOne({
+        //     where: {
+        //         // username: req.body.username,
+        //         username
+        //     },
+        // });
+        const email = 'cbreezy';
+        const dbUserData = await User.findOne({ where: { email }})
+    
 
         if (!dbUserData) {
             res
@@ -39,7 +45,7 @@ router.post('/login', async (req, res) => {
             return;
         }
 
-        const validPassword = await dbUserData.checkPassword(req.body.password);
+        const validPassword = await dbUserData.checkPassword('87654321');
 
         if (!validPassword) {
             res
