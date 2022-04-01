@@ -104,7 +104,7 @@
   .navbar {
     width: 100%;
     position: fixed;
-    background-color: var(--dark);
+    background-color: var(--light);
   }
   
   .nav-item {
@@ -117,7 +117,7 @@
 
   .hero {
     padding: 3% 4%;
-    background-color: var(--dark);
+    background-color: coral;
     color: var(--primary);
   }
   
