@@ -3,6 +3,7 @@ const { Post } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, (req, res) => {
+    console.log('****************' + req)
     Post.findAll({
         where: {
             userId: req.session.userId
@@ -10,8 +11,8 @@ router.get('/', withAuth, (req, res) => {
     })
     .then(dbPostData => {
         const posts = dbPostData.map((post) => post.get({ plain: true }));
-
-        res.render('all-posts-admin', {
+        console.log('********* line 14 of db routes')
+        res.render('/all-posts-admin', {
             layout: 'dashboard',
             posts
         });
@@ -34,7 +35,7 @@ router.get('/edit/:id', withAuth, (req, res) => {
         if (dbPostData) {
             const post = dbPostData.get({ plain: true });
 
-            res.render('edit-post', {
+            res.render('editposts', {
                 layout: 'dashboard',
                 post   
             });
